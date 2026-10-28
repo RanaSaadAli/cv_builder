@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Job Applications</title>
+</head>
+<body>
+    <h1>My Job Applications</h1>
+    <ul>
+
+        {%for application in applications%}
+            <li> {{application.company_name}} - {{application.job_description}} - {{application.status}} - {{application.date_applied}} </li>
+            <form method="POST" action="{% url 'update_status' application.id %}">
+            {% csrf_token %}
+            <select name="status">
+                <option value="applied">Applied</option>
+                <option value="got_reply">Got Reply</option>
+                <option value="rejected">Rejected</option>
+                <option value="no_reply">No Reply</option>
+            </select>
+            <button type="submit">Update</button>
+        </form>
+    </li>
+        {%endfor%}
+
+    </ul>
+</body>
+</html>
